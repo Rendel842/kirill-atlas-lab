@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070c12"><meta name="description" content="KIRILL × ATLAS — original digital systems, interfaces and AI experiments.">
+<title>KIRILL × ATLAS / DIGITAL LAB</title>
+<style>
+:root{--dark:#080b10;--paper:#eef5ef;--muted:#99aba9;--mint:#b4ffbd;--line:#29403e;color-scheme:dark}*{box-sizing:border-box}
+html{scroll-behavior:smooth}body{margin:0;background:var(--dark);color:var(--paper);font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit}::selection{background:#a4ffb6;color:#071711}
+nav{height:91px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,90px);position:absolute;top:0;left:0;right:0;z-index:5;border-bottom:1px solid #ffffff1c}
+.brand{font-size:21px;letter-spacing:-.05em;font-weight:900}.brand b{color:var(--mint)}.navright{display:flex;gap:26px;font:12px Consolas,monospace;align-items:center;color:#d5ded5}
+.navright a:hover{color:var(--mint)}.navright a:last-child{border:1px solid #8aa49b;padding:11px 19px;border-radius:40px}
+.hero{height:min(900px,100vh);min-height:660px;display:flex;align-items:center;position:relative;overflow:hidden;background:#101c25}
+.hero video,.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.42) saturate(1.3)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#080c14 0%,#080c14cc 27%,#080c1440 75%),linear-gradient(0deg,#080b10,transparent 38%)}
+.hero-content{z-index:1;position:relative;padding:120px clamp(20px,7vw,116px) 0;max-width:1250px}
+.eyebrow{font:13px Consolas,monospace;letter-spacing:.19em;color:var(--mint)}
+h1{font-size:clamp(70px,10vw,167px);letter-spacing:-.095em;line-height:.88;margin:20px 0 33px;font-weight:900}
+h1 em{font-style:normal;color:var(--mint)}.sub{font-size:clamp(17px,2vw,23px);max-width:550px;color:#c5d3ce;line-height:1.57}
+.cta{display:inline-flex;margin-top:31px;background:var(--mint);color:#0c2318;padding:19px 25px;border-radius:4px;font-size:14px;font-weight:900;gap:50px}
+.cta:hover{background:#f4fff0;transform:translateY(-2px)}.down{position:absolute;bottom:46px;left:clamp(20px,7vw,116px);z-index:2;color:#a7b1ac;font:12px Consolas,monospace}
+.marquee{background:#b4ffbd;color:#0b1a13;overflow:hidden;padding:13px 0;white-space:nowrap;font:bold 17px Consolas,monospace;letter-spacing:.13em}
+.marquee span{display:inline-block;animation:slide 25s linear infinite}@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+section{padding:clamp(75px,9vw,148px) clamp(20px,7vw,116px)}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:32px;padding-bottom:42px;border-bottom:1px solid #35403d}
+.section-head small{color:var(--mint);font:13px Consolas,monospace}.section-head h2{font-size:clamp(54px,7vw,118px);letter-spacing:-.075em;line-height:.92;margin:14px 0 0}
+.section-head p{font-size:16px;color:var(--muted);max-width:330px;line-height:1.6}
+.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:32px}
+.case{min-height:600px;position:relative;overflow:hidden;background:#101823;border:1px solid #35413c;transition:.3s;display:flex;flex-direction:column;justify-content:end}
+.case:hover{transform:translateY(-8px);border-color:#adffc4}.case:nth-child(2){background:#1b0a25}
+.case img,.case video{position:absolute;width:100%;height:100%;object-fit:cover;inset:0;opacity:.82;transition:transform .8s}
+.case:hover img,.case:hover video{transform:scale(1.045)}.case:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,#060b11f5 6%,#060b1182 40%,transparent 75%)}
+.case-text{position:relative;z-index:2;padding:36px}
+.case-text small{font:12px Consolas,monospace;color:#bdffc2}
+.case-text h3{font-size:clamp(54px,5vw,87px);margin:16px 0 9px;letter-spacing:-.07em;line-height:1}
+.case-text p{font-size:16px;color:#d6e4da;max-width:430px;line-height:1.5}
+.case-text strong{display:block;font:13px Consolas,monospace;margin-top:25px;color:#cbffe0}
+.case.small{min-height:460px}.case.small h3{font-size:clamp(43px,4vw,68px)}
+.pulse{display:inline-block;width:9px;height:9px;border-radius:50%;background:#7afa9a;margin-right:8px;box-shadow:0 0 20px #7afa9a}
+.break{padding:100px 7vw;min-height:640px;background:#e5ede4;color:#0e1c21;position:relative;overflow:hidden}
+.break:after{content:"";position:absolute;right:-15%;top:-42%;height:900px;width:900px;border:100px solid #bed1c5;border-radius:50%}
+.break h2{font-size:clamp(76px,9vw,150px);line-height:.91;letter-spacing:-.09em;margin:17px 0;max-width:950px;position:relative;z-index:1}
+.break p{font-size:21px;position:relative;z-index:1}.break a{display:inline-block;position:relative;z-index:1;margin-top:14px;border-bottom:3px solid #162d25;padding-bottom:12px;font-weight:900}
+footer{padding:40px 7vw 70px;display:flex;justify-content:space-between;gap:30px;color:#95a89c;font:13px Consolas,monospace}
+footer a{color:#d5ffdf}
+@media(max-width:800px){nav{height:76px}.navright a:nth-child(-n+2){display:none}.hero{min-height:640px;height:85vh}.hero-content{padding-top:60px}h1{font-size:70px}
+.cases{grid-template-columns:1fr}.case{min-height:530px}.case.small{min-height:500px}.section-head{display:block}.break{min-height:540px}.break h2{font-size:69px}footer{display:block}footer div{margin-bottom:14px}}
+</style></head><body>
+<nav><a class="brand" href="#">KIRILL <b>×</b> ATLAS <span style="font-size:11px;font-weight:400;letter-spacing:.12em"> / DIGITAL LAB</span></a><div class="navright"><a href="#work">SELECTED WORK</a><a href="#about">PHILOSOPHY</a><a href="https://t.me/ProditioneOccidit">LET'S TALK ↗</a></div></nav>
+<div class="hero"><video autoplay muted playsinline loop preload="metadata" poster="assets/intro.jpg"><source src="assets/intro.mp4" type="video/mp4"></video>
+<div class="hero-content"><div class="eyebrow">INDEPENDENT DIGITAL LAB / 2026</div><h1>BUILT<br>TO <em>BREAK</em><br>THE ORDINARY.</h1>
+<p class="sub">Interfaces with a pulse. Systems that act. Automation that disappears into the experience. Original concepts and working experiments by Kirill.</p>
+<a class="cta" href="#work">EXPLORE THE LAB <span>↘</span></a></div><div class="down">↓ SCROLL TO EXPLORE // SOUND-ON VIDEOS BELOW</div></div>
+<div class="marquee"><span>DESIGN × ENGINEERING × AUTOMATION × INTELLIGENCE × MOTION × RESEARCH × EXECUTION × &nbsp; DESIGN × ENGINEERING × AUTOMATION × INTELLIGENCE × MOTION × RESEARCH × EXECUTION × &nbsp;</span></div>
+<section id="work"><div class="section-head"><div><small>00 / SELECTED EXPERIENCES</small><h2>NOT JUST<br>PIXELS.</h2></div><p>Move past portfolios made of promises. Open the experiments. Touch the controls. See what runs.</p></div>
+<div class="cases">
+<a class="case" href="vanta.html"><img src="assets/vanta.jpg" alt="VANTA prototype concept interface"><div class="case-text"><small>01 / LAB CONCEPT / INTERACTIVE</small><h3>VANTA/OS</h3><p>A command center for orchestrating complex work. Five nodes. One input. Traceable execution.</p><strong><span class="pulse"></span>LAUNCH WORKING DEMO ↗</strong></div></a>
+<a class="case" href="spectra.html"><video autoplay muted playsinline loop poster="assets/spectra.jpg"><source src="assets/spectra.mp4" type="video/mp4"></video><div class="case-text"><small>02 / LAB CONCEPT / GENERATIVE</small><h3>SPECTRA.</h3><p>Shapes that listen. Motion that responds. A living interface, not a frozen mockup.</p><strong><span class="pulse"></span>PLAY WITH THE INTERFACE ↗</strong></div></a>
+<a class="case small" href="https://t.me/kirillxatlas/20"><img src="assets/bridge.jpg" alt="Telegram bridge presentation"><div class="case-text"><small>03 / REAL INTEGRATION / TESTED</small><h3>TELEGRAM<br>BRIDGE.</h3><p>ChatGPT → local runtime → Telegram MTProto. A real message sent and verified back through the API.</p><strong>OPEN THE VERIFIED CASE ↗</strong></div></a>
+<a class="case small" href="https://t.me/kirillxatlas/22"><img src="assets/intro.jpg" alt="KIRILL ATLAS visual universe"><div class="case-text"><small>04 / THE NEXT EXPERIMENT</small><h3>YOUR<br>MOVE.</h3><p>Vote for what should be built next. The audience gets a say in the next lab experiment.</p><strong>VOTE IN TELEGRAM ↗</strong></div></a>
+</div></section>
+<div class="break" id="about"><div class="eyebrow" style="color:#4a735e">THE APPROACH / CODE × TASTE × THINKING</div><h2>DON'T FIND<br>A TEMPLATE.<br><i style="font-style:normal;color:#447b5e">BUILD THE THING.</i></h2>
+<p>New ideas. Strange problems. Nothing off-the-shelf.</p><a href="https://t.me/ProditioneOccidit">TELL ME WHAT YOU WANT TO BUILD ↗</a></div>
+<footer><div>© 2026 KIRILL × ATLAS. ORIGINAL EXPERIMENTS.</div><div>CONCEPT STUDIES ARE LAB DEMOS, NOT COMMERCIAL CLIENT WORK.</div><div><a href="https://t.me/kirillxatlas">TELEGRAM CHANNEL ↗</a></div></footer></body></html>

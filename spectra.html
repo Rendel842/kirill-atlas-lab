@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SPECTRA / Generative Interface | KIRILL × ATLAS</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0c071c;color:#eee6fd;font-family:Arial,Helvetica,sans-serif;overflow:hidden}canvas{position:fixed;inset:0;width:100%;height:100%}
+.bg{position:fixed;inset:0;pointer-events:none;background:linear-gradient(90deg,#110a22 0%,#110a2299 35%,transparent 85%)}
+.top{position:absolute;left:5vw;right:5vw;top:5vh;display:flex;align-items:center;justify-content:space-between;gap:14px;z-index:2}
+.brand{font-size:16px;font-weight:900;letter-spacing:.08em}.brand b{color:#ee5ef7}
+.top a{font-size:12px;color:#deb4ef;text-decoration:none;border:1px solid #985ab0;padding:12px 15px;border-radius:30px}
+.hero{position:absolute;left:6vw;top:24vh;pointer-events:none}small{color:#e987e8;letter-spacing:.2em;font-size:12px;font-family:monospace}
+h1{margin:15px 0 8px;letter-spacing:-.08em;font-size:clamp(64px,12vw,160px);line-height:1}
+h1 span{color:#eb66f1}p{margin:20px 0;line-height:1.65;color:#c7a8d8;max-width:350px}
+.control{position:absolute;bottom:5vh;left:6vw;right:6vw;display:flex;gap:12px;align-items:center;z-index:5}
+button{padding:13px 20px;background:#ea80f0;color:#240c30;border:0;border-radius:30px;font-weight:800;cursor:pointer}
+label{font-family:monospace;font-size:11px;color:#b77ecc}input{accent-color:#eb70ef;max-width:160px}
+.foot{margin-left:auto;font-family:monospace;font-size:11px;color:#a685ba}
+@media(max-width:650px){.hero{top:20vh}.control{flex-wrap:wrap;bottom:3vh}.foot{width:100%;margin:4px 0}.top a{font-size:10px}p{max-width:230px}}
+</style></head><body><canvas id="c"></canvas><div class="bg"></div>
+<div class="top"><div class="brand">KIRILL <b>×</b> ATLAS / <span style="font-weight:400">LAB</span></div><a href="index.html">← BACK TO LAB</a></div>
+<div class="hero"><small>EXP 002 // INTERACTIVE CONCEPT</small><h1>SPEC<span>TRA.</span></h1><p>The interface is not static. Move your cursor or finger. Change energy. Watch the system react.</p></div>
+<div class="control"><button id="mode">PAUSE MOTION</button><label>ENERGY <input type="range" id="energy" min=".25" max="2.5" step=".05" value="1"></label><span class="foot">CODE-DRIVEN VISUAL / NO EXTERNAL LIBRARIES</span></div>
+<script>
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');let W,H,dpr,run=true,t=0,energy=1;
+let pointer={x:.75,y:.5},current={x:.75,y:.5};
+function resize(){dpr=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+addEventListener('resize',resize);resize();
+function move(e){pointer.x=e.clientX/W;pointer.y=e.clientY/H}
+addEventListener('pointermove',move);document.getElementById('energy').oninput=e=>energy=+e.target.value;
+document.getElementById('mode').onclick=e=>{run=!run;e.target.textContent=run?'PAUSE MOTION':'RESUME MOTION'};
+const dots=Array.from({length:120},(_,i)=>({a:i*2.39996,r:50+Math.sqrt(i)*31,s:(i%4+1)*.7}));
+function frame(){ctx.fillStyle='#0e071e';ctx.fillRect(0,0,W,H);if(run)t+=.012*energy;
+current.x+=(pointer.x-current.x)*.028;current.y+=(pointer.y-current.y)*.028;
+let cx=W*(.75+(current.x-.75)*.22),cy=H*(.52+(current.y-.5)*.30),rad=Math.min(W*.44,H*.62);
+let g=ctx.createRadialGradient(cx,cy,10,cx,cy,rad*1.3);g.addColorStop(0,'#3e1851');g.addColorStop(.5,'#180d34');g.addColorStop(1,'#0c071d');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+for(let j=0;j<18;j++){let r=rad*(.27+j*.032);ctx.beginPath();ctx.strokeStyle=j%3===0?'rgba(56,204,255,.32)':'rgba(236,82,253,.28)';ctx.lineWidth=j%4===0?2.4:1.2;
+ctx.ellipse(cx,cy,r,r*.74,t*.19,((t*.8+j*.54)%6.283),((t*.8+j*.54)%6.283)+Math.PI*1.08);ctx.stroke()}
+for(let j=0;j<dots.length;j++){let z=dots[j],a=z.a+t*(.48+(j%9)*.018),r=rad*(.25+(z.r/520)*.85)*(1+.04*Math.sin(t*2+j));
+let x=cx+r*Math.cos(a),y=cy+r*.7*Math.sin(a),size=z.s*(1+.45*Math.sin(t*3+j));ctx.beginPath();ctx.fillStyle=j%4===0?'#4ae2ff':'#df6dfb';ctx.arc(x,y,Math.max(1,size),0,6.283);ctx.fill();
+if(j%7===0){let a2=a+.4;ctx.beginPath();ctx.strokeStyle='rgba(243,116,246,.19)';ctx.moveTo(x,y);ctx.lineTo(cx+(r-42)*Math.cos(a2),cy+(r-42)*.7*Math.sin(a2));ctx.stroke()}}
+requestAnimationFrame(frame)}frame();
+</script></body></html>

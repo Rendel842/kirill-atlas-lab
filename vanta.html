@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VANTA // AI Operations Lab</title>
+<style>
+:root{color-scheme:dark;--bg:#061418;--ink:#ecfef5;--mut:#6f9a95;--acid:#91ffbd;--card:#0f252a;--stroke:#234a49}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 20%,#163c43,transparent 50%),var(--bg);font-family:Segoe UI,Arial,sans-serif;color:var(--ink)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.08;background-image:linear-gradient(90deg,#8fffc8 1px,transparent 1px),linear-gradient(#8fffc8 1px,transparent 1px);background-size:56px 56px}
+header{max-width:1500px;margin:auto;padding:35px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--stroke)}
+.brand{font-size:22px;font-weight:900;letter-spacing:.04em}.brand b{color:var(--acid)}.eyebrow{font:12px Consolas,monospace;color:var(--acid);letter-spacing:.13em}.chip{font:12px Consolas,monospace;border:1px solid var(--stroke);border-radius:30px;padding:12px 19px;background:#102729;color:var(--acid)}
+main{max-width:1500px;padding:46px 40px;margin:auto}h1{font-size:clamp(52px,7vw,98px);line-height:.95;letter-spacing:-.065em;margin:17px 0 18px}h1 span{color:var(--acid)}
+.sub{max-width:740px;font-size:19px;color:#a7c8be;line-height:1.6}.row{display:grid;grid-template-columns:1.3fr .7fr;gap:20px;margin-top:38px}
+.card{background:linear-gradient(145deg,#112a2d,#0c1d24);border:1px solid var(--stroke);border-radius:22px;padding:28px;box-shadow:0 14px 60px #0005}
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.stat{padding:18px;background:#0b1e22;border:1px solid #1c3639;border-radius:16px}
+.stat strong{display:block;font-size:40px;line-height:1.5;letter-spacing:-.04em}.stat small{color:var(--mut)}
+.nodegrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:30px}
+.node{padding:17px 8px;text-align:center;border:1px solid #30564e;border-radius:15px;background:#10252a;transition:.3s;position:relative}
+.node.active{background:#2b684f;box-shadow:0 0 35px #81ffab55;border-color:#86ffaf;transform:translateY(-7px)}
+.node:after{content:"→";position:absolute;right:-16px;top:31px;color:var(--acid);z-index:3}
+.node:last-child:after{display:none}.node i{display:block;color:var(--acid);font-size:24px;font-style:normal;margin-bottom:11px}.node b{font-size:12px;letter-spacing:.03em}
+.track{height:5px;background:#1d3637;border-radius:8px;margin-top:36px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#34c9af,#b5ff9c);transition:width .3s}
+.panel-title{font:13px Consolas,monospace;color:var(--acid);letter-spacing:.1em;margin:0 0 19px}
+option{background:#122b2a}select,button{font:15px Segoe UI,Arial,sans-serif;width:100%;padding:17px;border-radius:13px}
+select{color:#eafff5;background:#102e2c;border:1px solid #376a59;margin-bottom:15px}
+button{border:0;background:#a5ffbe;color:#062e25;font-weight:800;cursor:pointer;transition:.2s}
+button:hover{background:#e0ffe8;transform:translateY(-2px)}button:disabled{cursor:wait;filter:grayscale(1)}
+.note{font-size:12px;color:#709a8e;line-height:1.5;margin-top:12px}
+.log{height:262px;overflow:auto;font:12px/1.7 Consolas,monospace;color:#a2cebe}
+.entry{border-bottom:1px solid #183a37;padding:7px 0}.entry:before{content:">";color:#b0ffbc;margin-right:8px}
+footer{max-width:1500px;margin:28px auto;padding:18px 40px 55px;color:#87a9a5;display:flex;justify-content:space-between;font:12px Consolas,monospace}
+a{color:#9effc5;text-decoration:none}
+@media(max-width:900px){main{padding:24px 17px}header{padding:22px 17px}.row{grid-template-columns:1fr}h1{font-size:56px}.nodegrid{grid-template-columns:repeat(5,1fr);gap:3px}.node{padding:12px 2px}.node b{font-size:9px}.node:after{right:-7px}.stat strong{font-size:26px}.statgrid{gap:7px}.stat{padding:8px}footer{padding:20px}}
+</style></head><body>
+<header><div class="brand">KIRILL <b>×</b> ATLAS <span style="font-size:12px;font-weight:400;color:#7f9c96"> / DIGITAL LAB</span></div><div class="chip">● OFFLINE / INTERACTIVE CONCEPT</div></header>
+<main><div class="eyebrow">EXPERIMENT 01 / SYSTEM DESIGN</div>
+<h1>VANTA<span>/OS</span><br>WORK, <span>ORCHESTRATED.</span></h1>
+<p class="sub">Что, если управлять сложным процессом так же просто, как запустить одну команду? Ниже — интерактивный симулятор маршрутизации задач: нажми RUN и посмотри, как проходит сигнал.</p>
+<div class="row">
+<div class="card"><div class="panel-title">01 / ORCHESTRATION FLOW</div><div class="statgrid">
+<div class="stat"><small>SIMULATED TASKS</small><strong id="jobs">0</strong></div>
+<div class="stat"><small>FINISHED NODES</small><strong id="nodes">0/5</strong></div>
+<div class="stat"><small>PIPELINE STATUS</small><strong id="state" style="font-size:30px;color:var(--acid)">IDLE</strong></div></div>
+<div class="nodegrid" id="flow"></div><div class="track"><div class="bar" id="bar"></div></div>
+<p class="note">Это работающий клиентский UI с программной симуляцией. Нет подключения к внешнему CRM, реальным заказам или сторонним API.</p></div>
+<div class="card"><div class="panel-title">02 / RUN SCENARIO</div>
+<select id="scenario"><option>INBOUND LEAD ROUTER</option><option>CONTENT PRODUCTION</option><option>SUPPORT TRIAGE</option></select>
+<button id="run" onclick="run()">▶ RUN DEMO</button><div class="panel-title" style="margin-top:31px">03 / EVENT STREAM</div>
+<div id="log" class="log"><div class="entry">SYSTEM ONLINE. AWAITING COMMAND.</div></div></div></div>
+</main>
+<footer><span>PROTOTYPE / HTML+CSS+JS / NO SERVER REQUIRED</span><a href="https://t.me/ProditioneOccidit">CONTACT THE BUILDER ↗</a></footer>
+<script>
+const tasks=['INGEST','NORMALIZE','REASON','EXECUTE','VERIFY'];
+const flow=document.getElementById('flow'),log=document.getElementById('log');
+tasks.forEach((n,i)=>{let e=document.createElement('div');e.className='node';e.id='n'+i;e.innerHTML='<i>0'+(i+1)+'</i><b>'+n+'</b>';flow.appendChild(e)});
+function record(s){let e=document.createElement('div');e.className='entry';e.textContent=new Date().toLocaleTimeString()+'  '+s;log.prepend(e)}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+let count=0,busy=false;
+async function run(){if(busy)return;busy=true;const btn=document.getElementById('run');btn.disabled=true;
+let scenario=document.getElementById('scenario').value;document.getElementById('state').textContent='RUNNING';
+document.querySelectorAll('.node').forEach(x=>x.classList.remove('active'));
+document.getElementById('bar').style.width='0%';record('START / '+scenario);
+for(let i=0;i<5;i++){await wait(470);document.getElementById('n'+i).classList.add('active');document.getElementById('nodes').textContent=(i+1)+'/5';document.getElementById('bar').style.width=((i+1)*20)+'%';record(tasks[i]+' / SUCCESS')}
+document.getElementById('state').textContent='VERIFIED';document.getElementById('jobs').textContent=++count;record('PIPELINE COMPLETED / DEMO');btn.disabled=false;busy=false}
+</script></body></html>
